@@ -1,0 +1,76 @@
+/* GENERAL SETTINGS */
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Rubik', sans-serif;
+}
+
+/* UTILITIES */
+
+.col-lightblue {
+    color: #2e8fff;
+}
+
+.bg-lightblue {
+    background: #2e8fff;
+    color: #fff;
+}
+
+.txt-upper {
+    text-transform: uppercase;
+}
+
+.txt-cap {
+    text-transform: capitalize;
+}
+
+/* HEADER */
+.main-header {
+    display: flex;
+    align-items: center;
+    padding-left: 30px;
+    flex-basis: 75px;
+    font-family: 'Acme', sans-serif ;
+}
+
+/* FILER BAR */
+.filter {
+    padding: 20px 0;
+    text-align: center;
+}
+
+.filter span {
+    margin-right: 10px;
+}
+
+/* ICON SECTION */
+.icons-section {
+    display: flex;
+    padding: 20px;
+    align-content: flex-start;
+    flex-wrap: wrap;
+    flex-grow: 1;
+    background: #ddd;
+}
+
+.icon-container {
+    width: calc( (100% / 6) - 20px);
+    margin: 10px;
+    padding: 20px 0;
+    background: #fff;
+    text-align: center;
+    border-radius: 15px;
+}
+
+.icon-container i {
+    font-size: 32px;
+    margin-bottom: 10px;
+}
