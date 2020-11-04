@@ -15,8 +15,21 @@ body {
 
 /* UTILITIES */
 
+/* COLORS */
 .col-lightblue {
     color: #2e8fff;
+}
+
+.col-blue {
+    color: #0f00ff;
+}
+
+.col-orange {
+    color: #fca504;
+}
+
+.col-purple {
+    color: #7e0080;
 }
 
 .bg-lightblue {
@@ -24,6 +37,7 @@ body {
     color: #fff;
 }
 
+/* TEXT */
 .txt-upper {
     text-transform: uppercase;
 }
