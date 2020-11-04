@@ -105,7 +105,7 @@ $(document).ready(function(){
     ];
 
     // ICONS SECTION
-    const inconsSection = $('.icons-section');
+    const iconsSection = $('.icons-section');
 
     // COLORS
     let colors = [
@@ -117,16 +117,28 @@ $(document).ready(function(){
 
     const colored = colorIcons (icons, colors)
     // PRINT INTO DOM
-    printIcons(colored, inconsSection);
+    printIcons(colored, iconsSection);
     console.log(colorIcons (icons, colors));
 
+    // FILTER
+    let select = $('#filter');
+    let filter = typeIcons(icons)
 
+    options(filter, select)
 
+    select.change(() => {
+        const selected = select.val();
+
+        const filterIcons = filtered(colored, selected);
+        printIcons( filterIcons, iconsSection )
+    });
 
 }); // <-- end doc. ready
 
 // PRINT ICONS FUNCTION
-function printIcons( icons, inconsSection ) {
+function printIcons( icons, iconsSection ) {
+
+    iconsSection.html('');
 
     icons.forEach( ( i ) => {
         // DESTRUCTURING
@@ -141,7 +153,7 @@ function printIcons( icons, inconsSection ) {
         </div>
         ` 
 
-        return inconsSection.append(printIcon)
+        return iconsSection.append(printIcon)
     });
 };
 
@@ -180,3 +192,26 @@ function typeIcons( icons ) {
     return types;
 
 };
+
+// OPTIONS 
+function options(filter, select) {
+
+    filter.forEach( (option) => {
+        select.append( `<option value="${option}">${option.charAt(0).toUpperCase()+option.slice(1)}</option>` )
+    });
+
+}
+// FILTERED
+function filtered(colored, selected) {
+
+    if ( selected === 'all' ) {
+        return colored;
+    };
+
+    let filtered = colored.filter((i) => {
+        return i.type === selected;
+    });
+
+    return filtered;
+
+}
