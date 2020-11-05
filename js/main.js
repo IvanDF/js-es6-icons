@@ -6,212 +6,189 @@ $(document).ready(function(){
 
     // Icon database
     const icons = [
-        {
-          name: 'cat',
-          prefix: 'fa-',
-          type: 'animal',
-          family: 'fas',
-        },
-        {
-          name: 'crow',
-          prefix: 'fa-',
-          type: 'animal',
-          family: 'fas',
-        },
-        {
-          name: 'dog',
-          prefix: 'fa-',
-          type: 'animal',
-          family: 'fas',
-        },
-        {
-          name: 'dove',
-          prefix: 'fa-',
-          type: 'animal',
-          family: 'fas',
-        },
-        {
-          name: 'dragon',
-          prefix: 'fa-',
-          type: 'animal',
-          family: 'fas',
-        },
-        {
-          name: 'horse',
-          prefix: 'fa-',
-          type: 'animal',
-          family: 'fas',
-        },
-        {
-          name: 'hippo',
-          prefix: 'fa-',
-          type: 'animal',
-          family: 'fas',
-        },
-        {
-          name: 'fish',
-          prefix: 'fa-',
-          type: 'animal',
-          family: 'fas',
-        },
-        {
-          name: 'carrot',
-          prefix: 'fa-',
-          type: 'vegetable',
-          family: 'fas',
-        },
-        {
-          name: 'apple-alt',
-          prefix: 'fa-',
-          type: 'vegetable',
-          family: 'fas',
-        },
-        {
-          name: 'lemon',
-          prefix: 'fa-',
-          type: 'vegetable',
-          family: 'fas',
-        },
-        {
-          name: 'pepper-hot',
-          prefix: 'fa-',
-          type: 'vegetable',
-          family: 'fas',
-        },
-        {
-          name: 'user-astronaut',
-          prefix: 'fa-',
-          type: 'user',
-          family: 'fas',
-        },
-        {
-          name: 'user-graduate',
-          prefix: 'fa-',
-          type: 'user',
-          family: 'fas',
-        },
-        {
-          name: 'user-ninja',
-          prefix: 'fa-',
-          type: 'user',
-          family: 'fas',
-        },
-        {
-          name: 'user-secret',
-          prefix: 'fa-',
-          type: 'user',
-          family: 'fas',
-        },
+          {
+            name: 'cat',
+            prefix: 'fa-',
+            type: 'animal',
+            family: 'fas',
+          },
+          {
+            name: 'crow',
+            prefix: 'fa-',
+            type: 'animal',
+            family: 'fas',
+          },
+          {
+            name: 'dog',
+            prefix: 'fa-',
+            type: 'animal',
+            family: 'fas',
+          },
+          {
+            name: 'dove',
+            prefix: 'fa-',
+            type: 'animal',
+            family: 'fas',
+          },
+          {
+            name: 'dragon',
+            prefix: 'fa-',
+            type: 'animal',
+            family: 'fas',
+          },
+          {
+            name: 'horse',
+            prefix: 'fa-',
+            type: 'animal',
+            family: 'fas',
+          },
+          {
+            name: 'hippo',
+            prefix: 'fa-',
+            type: 'animal',
+            family: 'fas',
+          },
+          {
+            name: 'fish',
+            prefix: 'fa-',
+            type: 'animal',
+            family: 'fas',
+          },
+          {
+            name: 'carrot',
+            prefix: 'fa-',
+            type: 'vegetable',
+            family: 'fas',
+          },
+          {
+            name: 'apple-alt',
+            prefix: 'fa-',
+            type: 'vegetable',
+            family: 'fas',
+          },
+          {
+            name: 'lemon',
+            prefix: 'fa-',
+            type: 'vegetable',
+            family: 'fas',
+          },
+          {
+            name: 'pepper-hot',
+            prefix: 'fa-',
+            type: 'vegetable',
+            family: 'fas',
+          },
+          {
+            name: 'user-astronaut',
+            prefix: 'fa-',
+            type: 'user',
+            family: 'fas',
+          },
+          {
+            name: 'user-graduate',
+            prefix: 'fa-',
+            type: 'user',
+            family: 'fas',
+          },
+          {
+            name: 'user-ninja',
+            prefix: 'fa-',
+            type: 'user',
+            family: 'fas',
+          },
+          {
+            name: 'user-secret',
+            prefix: 'fa-',
+            type: 'user',
+            family: 'fas',
+          },
     ];
 
-    // ICONS SECTION
-    const iconsSection = $('.icons-section');
+    // ICONS CONTAINER
+    let iconContainer = $('.icons-section');
+    // SELECTION FILTER
+    let filterSelect = $('#filter');
+    
+    // ADD OPTION FILTER
+    optionFilter(icons, filterSelect)
+    printIcons( icons, iconContainer )
 
-    // COLORS
-    let colors = [
-        'col-blue',
-        'col-orange',
-        'col-purple'
-    ];
-    console.log(colors);
 
-    const colored = colorIcons (icons, colors)
-    // PRINT INTO DOM
-    printIcons(colored, iconsSection);
-    console.log(colorIcons (icons, colors));
+    // SET FILTER
+    filterSelect.change(() => {
+        const selected = filterSelect.val();
 
-    // FILTER
-    let select = $('#filter');
-    let filter = typeIcons(icons)
-
-    options(filter, select)
-
-    select.change(() => {
-        const selected = select.val();
-
-        const filterIcons = filtered(colored, selected);
-        printIcons( filterIcons, iconsSection )
+        const filterIcons = filterFunc(icons, selected);
+        printIcons( filterIcons, iconContainer )
     });
 
-}); // <-- end doc. ready
+  }); // <-- end doc. ready
 
-// PRINT ICONS FUNCTION
-function printIcons( icons, iconsSection ) {
+//   PRINT ICONS COLORED
+function printIcons( icons, container ) {
+    
+    container.html('');
 
-    iconsSection.html('');
-
-    icons.forEach( ( i ) => {
+    icons.forEach( el => {
+        
         // DESTRUCTURING
-        const { family, prefix, name, color } = i
+        const { family, prefix, name, type } = el
 
-        // PRINT INTO DOM
-        const printIcon = 
+        let color = null;
+
+        if ( type == 'animal' ) {
+            color = 'col-blue'
+        } else if ( type == 'vegetable' ) {
+            color = 'col-orange'
+        } else if ( type == 'user' ) {
+            color = 'col-purple'
+        }
+        let printIcon = 
         `
         <div class="icon-container txt-upper">
             <i class="${family} ${prefix}${name} ${color}"></i>
             <p class="icon-name">${name}</p>
         </div>
-        ` 
+        `
 
-        return iconsSection.append(printIcon)
+        return container.append(printIcon)
+    });
+    
+};
+
+// ADD OPTIONS
+function optionFilter(icons, filtered){
+
+    let iconType = []
+    
+    icons.forEach(( el ) => {
+
+        if ( !iconType.includes(el.type) ) {
+
+            iconType.push(el.type)
+
+            let printOption = 
+            `
+            <option value="${el.type}">${el.type}</option>
+            `
+
+            return filtered.append(printOption)
+            
+        }
     });
 };
 
-// ICONS COLOR
-function colorIcons (icons, color) {
-
-    // GET TYPES
-    const types = typeIcons( icons )
-
-    // GET COLORS
-    const coloredIcons = icons.map(( i ) => {
-        const index = types.indexOf( i.type );
-
-        return {
-            ...i,
-            color: color[index]
-        }
-    });
-
-    return coloredIcons;
-}
-
-// ICONS TYPE
-function typeIcons( icons ) {
-
-    const types = [];
-
-    icons.forEach( i => {
-        
-        if ( !types.includes( i.type) ) {
-            types.push( i.type)
-        }
-
-    });
-
-    return types;
-
-};
-
-// OPTIONS 
-function options(filter, select) {
-
-    filter.forEach( (option) => {
-        select.append( `<option value="${option}">${option.charAt(0).toUpperCase()+option.slice(1)}</option>` )
-    });
-
-}
 // FILTERED
-function filtered(colored, selected) {
+function filterFunc(icons, filtered) {
 
-    if ( selected === 'all' ) {
-        return colored;
+    if ( filtered === 'all' ) {
+        return icons;
     };
 
-    let filtered = colored.filter((i) => {
-        return i.type === selected;
+    let filteredIcon = icons.filter((el) => {
+        return el.type === filtered;
     });
 
-    return filtered;
+    return filteredIcon;
 
 }
