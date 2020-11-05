@@ -106,14 +106,13 @@ $(document).ready(function(){
 
     // ICONS CONTAINER
     let iconContainer = $('.icons-section');
-    // SELECTION FILTER
-    let filterSelect = $('#filter');
-    
-    // ADD OPTION FILTER
-    optionFilter(icons, filterSelect)
+    // PRINT ICONS
     printIcons( icons, iconContainer )
 
-
+    // SELECTION FILTER
+    let filterSelect = $('#filter');
+    // ADD OPTION FILTER
+    optionFilter(icons, filterSelect)
     // SET FILTER
     filterSelect.change(() => {
         const selected = filterSelect.val();
@@ -171,9 +170,8 @@ function optionFilter(icons, filtered){
             `
             <option value="${el.type}">${el.type}</option>
             `
-
             return filtered.append(printOption)
-            
+
         }
     });
 };
@@ -181,13 +179,13 @@ function optionFilter(icons, filtered){
 // FILTERED
 function filterFunc(icons, filtered) {
 
+    // SET ALL ICONS
     if ( filtered === 'all' ) {
         return icons;
     };
 
-    let filteredIcon = icons.filter((el) => {
-        return el.type === filtered;
-    });
+    // SET ICONS TYPE
+    let filteredIcon = icons.filter((el) =>  el.type === filtered);
 
     return filteredIcon;
 
