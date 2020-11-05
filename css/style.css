@@ -88,3 +88,21 @@ body {
     font-size: 32px;
     margin-bottom: 10px;
 } 
+
+@media screen and ( max-width: 1200px ) {
+
+    .icon-container {
+        width: calc( (100% / 4) - 20px);
+    }    
+}
+
+@media screen and ( max-width: 600px ) {
+
+    body {
+        min-height: 100%;
+    }
+
+    .icon-container {
+        width: calc( (100% / 2) - 20px);
+    }    
+}
